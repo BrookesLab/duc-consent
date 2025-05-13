@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/BrookesLab/duc-consent/blob/main/duc-schema/2.0.0/duc-schema.json",
+  "type": "object",
+  "version": "2.0.0",
+  "required": ["conditions"],
+  "properties": {
+    "conditions": {
+      "description": "List of conditions, each condition containing condition clusters, condition parameters, asset IDs, scope, and consent details.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["conditionCluster", "scope", "consent"],
+        "properties": {
+          "conditionCluster": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["term", "rule"],
+              "properties": {
+                "term": {
+                  "type": "object",
+                  "required": ["label"],
+                  "properties": {
+                    "label": {
+                      "description": "A human readable name of the vocabulary/ontology condition term, such as ‘Disease specific research’.",
+                      "type": "string"
+                    },
+                    "uri": {
+                      "description": "A URI to the vocabulary/ontology term, such as DUO URI: ‘http://purl.obolibrary.org/obo/DUO_0000007’.",
+                      "type": "string", 
+                      "format": "uri"
+                    }
+                  }
+                },
+                "ornaments": {
+                  "description": "One or more concepts that specify the details of this condition in the conditionCluster.",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "description": "Optional human readable ornament detail that applies to this condition.",
+                        "type": "string"
+                      },
+                      "uri": {
+                        "description": "Optional vocabulary/ontology concept URI related to the ornament detail that applies to this condition.",
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                },
+                "rule": {
+                  "description": "The direction to interpret this condition term.",
+                  "type": "string",
+                  "enum": ["Obligatory", "Permitted", "Forbidden", "No Requirement"]
+                }
+              }
+            }
+          },
+          "parameter": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "description": "Optional human readable parameter detail that applies to the entire conditionCluster.",
+                "type": "string"
+              },
+              "uri": {
+                "description": "Optional vocabulary/ontology concept URI related to the parameter label that applies to the entire conditionCluster.",
+                "type": "string", 
+                "format": "uri"
+              },
+              "value": {
+                "description": "Optional value for the parameter if any.",
+                "type": ["string", "number"]
+              }
+            }
+          },
+          "assetsIdList": {
+            "description": "The list of assed IDs corresponding to the list of assets in 'assets' array.",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          },
+          "scope": {
+            "description": "A scope to state if this condition applies to all assets or some of assets.Whole of asset should be the default.",
+            "type": "string",
+            "enum": ["Whole of asset", "Part of asset"]
+          },
+          "consent": {
+            "description": "Optional consent status and response as it relates to the list of assetIdList and conditionCluster.",
+            "type": "object",
+            "required": ["status", "date", "response"],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": ["Given", "Refused", "Unstated"]
+              },
+              "date": {"type": "string", "format": "date-time"},
+              "response": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "assets": {
+      "description": "Optional list of assets that this DUC profile's conditions relate to.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "required": ["assetId", "assetName"],
+        "properties": {
+          "assetId": {
+            "description": "Required ID of the asset.",
+            "type": "string"
+          },
+          "assetName": {
+            "description": "Required name of the asset.",
+            "type": "string"
+          },
+          "assetDescription": {
+            "description": "Optional description of the asset.",
+            "type": "string"
+          },
+          "assetReferences": {
+            "description": "Optional list of web links to external documents describing the asset(s) this profile applies to, such as publications.",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {"type": "string", "format": "uri"}
+          },
+          "assetURI": {
+            "description": "Optional URI for the asset catalogue-level object (for example a DCAT object).",
+            "type": "string", 
+            "format": "uri"
+          }
+        }
+      }
+    },
+    "profileId": {
+      "description": "Optional URI with unique identifier of this DUC profile (e.g., https://domain/UUID).",
+      "type": "string", 
+      "format": "uri"
+    },
+    "profileVersion": {
+      "description": "Optional semantic version of this DUC profile (e.g., 0.0.1).",
+      "type": "string"
+    },
+    "profileName": {
+      "description": "Optional name of this DUC profile.",
+      "type": "string"
+    },
+    "ducVersion": {
+      "description": "Optional semantic version of the DUC schema (e.g., 2.0.0).",
+      "type": "string"
+    },
+    "creationDate": {
+      "description": "Optional date this DUC profile was first created in ISO 8601 format.",
+      "type": "string", 
+      "format": "date"
+    },
+    "lastUpdated": {
+      "description": "Optional date this DUC profile was most recently updated in ISO 8601 format.",
+      "type": "string", 
+      "format": "date"
+    },
+    "permissionMode": {
+      "description": "Optional default interpretation for all unstated conditions.",
+      "type": "string",
+      "enum": ["All unstated conditions are Forbidden", "All unstated conditions are Permitted"]
+    },
+    "language": {
+      "description": "Optional ISO 639-3 letter code for the language used in this DUC profile.",
+      "type": "string"
+    }
+  }
+}
