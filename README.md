@@ -48,6 +48,8 @@ This schema enables precise documentation of consent-related use conditions that
 
 ## 📘 Full Example
 
+- **Note**: This is a hypothatical example of a duc profile
+
 ```json
 {
   "profileId": "https://consent-data.org/duc/consent-001",
