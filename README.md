@@ -9,7 +9,7 @@ This repository provides a JSON Schema for modeling **consent-level Digital Use 
 This schema enables precise documentation of consent-related use conditions that can be directly tied to specific digital assets (e.g., datasets, records, files). It supports:
 
 - **Granular consent tracking** at the asset level
-- Modeling of **condition clusters** that describe rules under which data may be used
+- Modelling of **condition clusters** that describe rules under which data may be used
 - Linking of conditions to **specific assets** and **scope of access**
 - Capturing **consent decisions**, timestamps, and individual responses
 
@@ -41,7 +41,7 @@ This schema enables precise documentation of consent-related use conditions that
 
 ## 📄 Versioning
 
-- **Current Version**: `1.0.0`
+- **Current Version**: `2.0.0`
 - **Schema Draft**: [JSON Schema Draft 2020-12](https://json-schema.org/draft/2020-12/schema)
 
 ---
@@ -53,7 +53,7 @@ This schema enables precise documentation of consent-related use conditions that
   "profileId": "https://consent-data.org/duc/consent-001",
   "profileVersion": "1.0.0",
   "profileName": "Rare Disease Consent Profile",
-  "ducVersion": "1.0.0",
+  "ducVersion": "2.0.0",
   "creationDate": "2025-01-10",
   "lastUpdated": "2025-05-12",
   "permissionMode": "All unstated conditions are Forbidden",
