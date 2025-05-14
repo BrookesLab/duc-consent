@@ -1,16 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/BrookesLab/duc-consent/blob/main/duc-schema/2.0.0/duc-schema.json",
+  "$id": "https://github.com/BrookesLab/duc-consent/blob/main/duc-schema/1.0.1/duc-schema.json",
   "type": "object",
-  "version": "2.0.0",
+  "version": "1.0.1",
   "required": ["conditions"],
   "properties": {
     "conditions": {
-      "description": "List of conditions, each condition containing condition clusters, condition parameters, asset IDs, scope, and consent details.",
+      "description": "List of conditions, each condition containing condition clusters, condition parameters, asset IDs and consent details.",
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["conditionCluster", "scope", "consent"],
+        "required": ["conditionCluster", "assetsIdList", "consent"],
         "properties": {
           "conditionCluster": {
             "type": "array",
@@ -35,7 +35,7 @@
                     }
                   }
                 },
-                "ornaments": {
+                "termParameter": {
                   "description": "One or more concepts that specify the details of this condition in the conditionCluster.",
                   "type": "array",
                   "items": {
@@ -61,7 +61,7 @@
               }
             }
           },
-          "parameter": {
+          "conditionParameter": {
             "type": "object",
             "properties": {
               "label": {
@@ -87,11 +87,6 @@
               "type": "string"
             },
             "minItems": 1
-          },
-          "scope": {
-            "description": "A scope to state if this condition applies to all assets or some of assets.Whole of asset should be the default.",
-            "type": "string",
-            "enum": ["Whole of asset", "Part of asset"]
           },
           "consent": {
             "description": "Optional consent status and response as it relates to the list of assetIdList and conditionCluster.",
@@ -157,7 +152,7 @@
       "type": "string"
     },
     "ducVersion": {
-      "description": "Optional semantic version of the DUC schema (e.g., 2.0.0).",
+      "description": "Optional semantic version of the DUC schema (e.g., 1.0.1).",
       "type": "string"
     },
     "creationDate": {
@@ -173,7 +168,7 @@
     "permissionMode": {
       "description": "Optional default interpretation for all unstated conditions.",
       "type": "string",
-      "enum": ["All unstated conditions are Forbidden", "All unstated conditions are Permitted"]
+      "enum": ["All unstated conditions are forbidden", "All unstated conditions are permitted", "Null"]
     },
     "language": {
       "description": "Optional ISO 639-3 letter code for the language used in this DUC profile.",

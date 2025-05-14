@@ -10,7 +10,7 @@ This schema enables precise documentation of consent-related use conditions that
 
 - **Granular consent tracking** at the asset level
 - Modelling of **condition clusters** that describe rules under which data may be used
-- Linking of conditions to **specific assets** and **scope of access**
+- Linking of conditions to **specific assets** 
 - Capturing **consent decisions**, timestamps, and individual responses
 
 ---
@@ -20,7 +20,7 @@ This schema enables precise documentation of consent-related use conditions that
 - **Consent-Centric Design**: Focuses exclusively on conditions driven by user or subject consent
 - **Condition Clusters**: Modular condition structures including rule types and terms
 - **Explicit Asset Linkage**: Conditions are tied to one or more assets via unique identifiers
-- **Flexible Extensions**: Support for additional metadata via ornaments and parameters
+- **Flexible Extensions**: Support for additional metadata via termParameter and conditionParameter
 - **Strong Validation**: Conforms to [JSON Schema Draft 2020-12](https://json-schema.org/draft/2020-12/schema)
 
 ---
@@ -29,10 +29,9 @@ This schema enables precise documentation of consent-related use conditions that
 
 | Field | Description |
 |-------|-------------|
-| `conditions` | Main array of condition entries, each with associated asset IDs, scope, and consent |
+| `conditions` | Main array of condition entries, each with associated asset IDs, and consent |
 | `ConditionCluster` | Array of rule-driven terms (e.g., Permitted, Forbidden) defining allowed uses |
 | `assetsIdList` | List of asset identifiers this condition applies to |
-| `scope` | Defines whether the condition applies to all or part of an asset |
 | `consent` | Consent decision (e.g., Given, Refused), with date and narrative response |
 | `assets` | Optional asset metadata such as name, description, and external references |
 | `profileId`, `ducVersion`, `creationDate`, etc. | Metadata for versioning and traceability |
@@ -41,7 +40,7 @@ This schema enables precise documentation of consent-related use conditions that
 
 ## 📄 Versioning
 
-- **Current Version**: `2.0.0`
+- **Current Version**: `1.0.1`
 - **Schema Draft**: [JSON Schema Draft 2020-12](https://json-schema.org/draft/2020-12/schema)
 
 ---
@@ -55,7 +54,7 @@ This schema enables precise documentation of consent-related use conditions that
   "profileId": "https://consent-data.org/duc/consent-001",
   "profileVersion": "1.0.0",
   "profileName": "Rare Disease Consent Profile",
-  "ducVersion": "2.0.0",
+  "ducVersion": "1.0.1",
   "creationDate": "2025-01-10",
   "lastUpdated": "2025-05-12",
   "permissionMode": "All unstated conditions are Forbidden",
@@ -73,32 +72,32 @@ This schema enables precise documentation of consent-related use conditions that
   ],
   "conditions": [
     {
-      "ConditionCluster": [
+      "conditionCluster": [
         {
           "term": {
-            "label": "Clinical Research Use",
-            "uri": "http://example.org/terms/ClinicalResearchUse"
+            "label": "Geographical Area",
+            "uri": "http://example.org/parameters/GeographicalArea"
           },
           "rule": "Permitted",
-          "ornaments": [
-            "http://example.org/ornaments/DiseaseSpecificUse"
+          "termParameter": [
+            {
+              "label":"Europe",
+              "uri": "http://example.org/parameters/GeographicalArea/Europe"  
+            }
           ]
+          
         },
         {
           "term": {
-            "label": "Commercial Entity",
-            "uri": "http://example.org/terms/CommercialEntity"
+            "label": "Commercial Entity"
           },
           "rule": "Forbidden"
         }
       ],
       "conditionparameter": {
-        "label": "Geographical Area",
-        "uri": "http://example.org/parameters/GeographicalArea",
-        "value": "Europe"
+        "label": "Subject to participant consent"
       },
       "assetsIdList": ["asset-001"],
-      "scope": "All",
       "consent": {
         "status": "Given",
         "date": "2025-01-01T10:00:00Z",
@@ -107,4 +106,5 @@ This schema enables precise documentation of consent-related use conditions that
     }
   ]
 }
+
 

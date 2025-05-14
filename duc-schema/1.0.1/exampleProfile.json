@@ -1,0 +1,56 @@
+{
+  "profileId": "https://consent-data.org/duc/consent-001",
+  "profileVersion": "1.0.0",
+  "profileName": "Rare Disease Consent Profile",
+  "ducVersion": "1.0.1",
+  "creationDate": "2025-01-10",
+  "lastUpdated": "2025-05-12",
+  "permissionMode": "All unstated conditions are Forbidden",
+  "language": "eng",
+  "assets": [
+    {
+      "assetId": "asset-001",
+      "assetName": "Rare Disease Genome Dataset",
+      "assetDescription": "Whole genome sequencing data from participants with a rare genetic disorder.",
+      "assetReferences": [
+        "https://doi.org/10.1000/example-rare-disease"
+      ],
+      "assetURI": "https://datarepository.org/assets/asset-001"
+    }
+  ],
+  "conditions": [
+    {
+      "conditionCluster": [
+        {
+          "term": {
+            "label": "Geographical Area",
+            "uri": "http://example.org/parameters/GeographicalArea"
+          },
+          "rule": "Permitted",
+          "termParameter": [
+            {
+              "label":"Europe",
+              "uri": "http://example.org/parameters/GeographicalArea/Europe"  
+            }
+          ]
+          
+        },
+        {
+          "term": {
+            "label": "Commercial Entity"
+          },
+          "rule": "Forbidden"
+        }
+      ],
+      "conditionparameter": {
+        "label": "Subject to participant consent"
+      },
+      "assetsIdList": ["asset-001"],
+      "consent": {
+        "status": "Given",
+        "date": "2025-01-01T10:00:00Z",
+        "response": "Consent given for disease-specific clinical research within Europe. No commercial use permitted."
+      }
+    }
+  ]
+}
