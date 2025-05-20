@@ -1,16 +1,20 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/BrookesLab/duc-consent/blob/main/duc-schema/1.0.1/duc-schema.json",
   "type": "object",
   "version": "1.0.1",
-  "required": ["conditions"],
+  "required": ["conditions","assets"],
+  "additionalProperties": false,
+  "title": "Duc consent Schema",
+  "description": "This schema defines the structure of a DUC consent profile. It includes a list of conditions, each with its own condition clusters, condition parameters, asset IDs, and consent details. The schema also includes a list of assets that the conditions relate to, as well as metadata about the profile itself.",
   "properties": {
     "conditions": {
       "description": "List of conditions, each condition containing condition clusters, condition parameters, asset IDs and consent details.",
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["conditionCluster", "assetsIdList", "consent"],
+        "required": ["conditionCluster", "assetsIdList"],
+        "additionalProperties": false,
         "properties": {
           "conditionCluster": {
             "type": "array",
@@ -19,10 +23,12 @@
             "items": {
               "type": "object",
               "required": ["term", "rule"],
+              "additionalProperties": false,
               "properties": {
                 "term": {
                   "type": "object",
                   "required": ["label"],
+                  "additionalProperties": false,
                   "properties": {
                     "label": {
                       "description": "A human readable name of the vocabulary/ontology condition term, such as ‘Disease specific research’.",
@@ -92,6 +98,7 @@
             "description": "Optional consent status and response as it relates to the list of assetIdList and conditionCluster.",
             "type": "object",
             "required": ["status", "date", "response"],
+            "additionalProperties": false,
             "properties": {
               "status": {
                 "type": "string",
@@ -105,12 +112,13 @@
       }
     },
     "assets": {
-      "description": "Optional list of assets that this DUC profile's conditions relate to.",
+      "description": "list of assets that this DUC profile's conditions relate to.",
       "type": "array",
       "uniqueItems": true,
       "items": {
         "type": "object",
         "required": ["assetId", "assetName"],
+        "additionalProperties": false,
         "properties": {
           "assetId": {
             "description": "Required ID of the asset.",

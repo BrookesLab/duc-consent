@@ -21,7 +21,7 @@ This schema enables precise documentation of consent-related use conditions that
 - **Condition Clusters**: Modular condition structures including rule types and terms
 - **Explicit Asset Linkage**: Conditions are tied to one or more assets via unique identifiers
 - **Flexible Extensions**: Support for additional metadata via termParameter and conditionParameter
-- **Strong Validation**: Conforms to [JSON Schema Draft 2020-12](https://json-schema.org/draft/2020-12/schema)
+- **Strong Validation**: Conforms to [JSON Schema Draft 07](http://json-schema.org/draft-07/schema)
 
 ---
 
