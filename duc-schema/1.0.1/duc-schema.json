@@ -42,17 +42,17 @@
                   }
                 },
                 "termParameter": {
-                  "description": "One or more concepts that specify the details of this condition in the conditionCluster.",
+                  "description": "One or more concepts that specify the details of this term in the conditionCluster.",
                   "type": "array",
                   "items": {
                     "type": "object",
                     "properties": {
                       "label": {
-                        "description": "Optional human readable ornament detail that applies to this condition.",
+                        "description": "Optional human readable detail that applies to this term.",
                         "type": "string"
                       },
                       "uri": {
-                        "description": "Optional vocabulary/ontology concept URI related to the ornament detail that applies to this condition.",
+                        "description": "Optional vocabulary/ontology concept URI related to the detail that applies to this term.",
                         "type": "string",
                         "format": "uri"
                       }
